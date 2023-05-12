@@ -37,9 +37,6 @@
   }
 }
 
-
-
-
 /* Survey.css */
 .dots_container {
   display: flex;
@@ -55,7 +52,7 @@
   border-radius: 50%;
   display: inline-block;
   margin: 0 8px;
-  transition:1s
+  transition: 1s;
 }
 
 .active {
@@ -63,60 +60,58 @@
   cursor: pointer;
 }
 
-.nav_button{
-  padding:10px;
-  margin:10px;
-  cursor:pointer;
+.nav_button {
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
   border: 1px solid transparent;
   border-radius: 2px;
   font-size: 15px;
 }
-h3{
-  font-weight:400
+h3 {
+  font-weight: 400;
 }
 
 .input {
   font-size: 16px;
   text-align: center;
-  margin:5px
+  margin: 5px;
 }
 .text_input {
-  width:250px;
-  padding:20px;
-
+  width: 250px;
+  padding: 20px;
 }
 
-
-#add_word_input{
-  padding:20px;
+#add_word_input {
+  padding: 20px;
   display: block;
   text-align: center;
-  margin: 10px auto 
+  margin: 10px auto;
 }
-#add_word_submit{
-  padding:10px;
+#add_word_submit {
+  padding: 10px;
   display: block;
   text-align: center;
-  margin:auto;
-  cursor:pointer
+  margin: auto;
+  cursor: pointer;
 }
 #add_word_button {
-    margin: 10px auto;
-    position: relative;
-    background-color: #3a5b86;
-    color:white
+  margin: 10px auto;
+  position: relative;
+  background-color: #3a5b86;
+  color: white;
 }
-.error_message{
-  color:red;
+.error_message {
+  color: red;
   text-align: center;
 }
-.header{
-  margin:15px
+.header {
+  margin: 15px;
 }
 
-.change_mode{
+.change_mode {
   position: fixed;
-  top:10px;
-  right:10px;
+  top: 10px;
+  right: 10px;
   cursor: pointer;
 }
