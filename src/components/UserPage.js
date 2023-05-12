@@ -34,16 +34,17 @@ useEffect(() => {
 
     const calculateShowWords = () => {
     const possibleWords = words.filter(
-        (word) => word.bin < 11 || word.wrong_count < 10
+        (word) => word.bin < 11 && word.wrong_count < 10
       );
     if (possibleWords.length ===0 ) {
         setDone(true)
+        return
     }
     else{
         setDone(false)
     }
-    const wordsToShow = words.filter(
-      (word) => word.last_answer + bins[word.bin] < (Date.now()/1000) && word.bin < 11 && word.wrong_count < 10
+    const wordsToShow = possibleWords.filter(
+      (word) => word.last_answer + bins[word.bin] < (Date.now()/1000)
     );
     wordsToShow.sort((a, b) => {
         if (a.bin !== b.bin) {
