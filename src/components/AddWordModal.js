@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState,useEffect }from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -19,10 +19,21 @@ const style = {
 };
 
 export default function AddWordModal(props) {
+  const [definition, setDefinition] = useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
+  //clear previous input on mount
+  useEffect(()=>{
+    setDefinition("")
+    setErrorMessage("")
+  },[props.isOpen])
   const handleSubmit = (e) => {
     e.preventDefault();
     const word = e.target.word.value;
+    // check word is not empty
+    if (word === ""){
+      setErrorMessage("Please Type Word");
+      return;
+    }
     //check if word already exists
     const wordExists = props.words.find(
       (existing_word) => existing_word._id === word.toLowerCase()
@@ -32,16 +43,40 @@ export default function AddWordModal(props) {
       return;
     }
     // Get definition of the word from external api
-    requests
+    if(definition ==="")
+    {
+      requests
       .get_definition(e.target.word.value)
       .then((data) => {
         if (data.title === "No Definitions Found") {
           setErrorMessage(data.title);
-          return;
+          return Promise.reject(data.title);
         }
         if (Array.isArray(data)) {
-          const definition = data[0].meanings[0].definitions[0].definition;
-          requests
+          const newDefinition = data[0].meanings[0].definitions[0].definition;
+          setDefinition(newDefinition);
+          return newDefinition; // return this for the next then
+        }
+      })
+      .then((newDefinition) => {
+        // newDefinition here should be the same as the one set in the state
+        add_word(word, newDefinition);
+      })
+      .catch((e) => {
+        console.log(e)
+        const errorMessage = (e.response && e.response.data.message)
+          ? e.response.data.message.replace(" pal", "")
+          : e;
+        setErrorMessage(errorMessage);
+      });    
+    }
+    else{
+      add_word(word,definition)
+    }
+    }
+
+  const add_word = (word,definition) =>{
+    requests
             .add_word(word, definition)
             .then((res) => {
               if (res.success) {
@@ -49,6 +84,8 @@ export default function AddWordModal(props) {
                 newWords.unshift({ _id: word, definition: definition });
                 props.setWords(newWords);
                 props.closeModal();
+                setDefinition=""
+                setErrorMessage=""
               } else {
                 setErrorMessage("Definition not found for word");
                 return;
@@ -58,12 +95,7 @@ export default function AddWordModal(props) {
               setErrorMessage("Error Occured, Please Contact Support")
             );
         }
-      })
-      .catch((e) => {
-        setErrorMessage(e.response.data.message.replace(" pal", ""));
-      });
-  };
-
+  
   return (
     <div>
       <Modal
@@ -79,10 +111,17 @@ export default function AddWordModal(props) {
                 <Typography>Filled</Typography>
               </button>
             )}
-            <input id="add_word_input" name="word" placeholder="Word" />
+            <input className="add_word_input" name="word" placeholder="Word" />
+            <input className="add_word_input" 
+            name="definition" 
+            value={definition}
+            onChange={(e) => {
+              setDefinition(e.target.value);
+            }}
+            placeholder="Add Definition" />
             <p className="error_message">{errorMessage}</p>
             <button id="add_word_submit" type="submit">
-              Add
+              { definition === "" ? "Lookup Definition & Add":"Add"}
             </button>
           </form>
         </Box>

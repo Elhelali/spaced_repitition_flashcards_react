@@ -82,12 +82,6 @@ h3 {
   padding: 20px;
 }
 
-#add_word_input {
-  padding: 20px;
-  display: block;
-  text-align: center;
-  margin: 10px auto;
-}
 #add_word_submit {
   padding: 10px;
   display: block;
@@ -123,4 +117,11 @@ h3 {
   margin:10px;
   border: 1px;
   border-radius: 2px;
+}
+.add_word_input{
+  border: 1px solid grey;
+  padding: 20px;
+  display: block;
+  text-align: center;
+  margin: 10px auto;
 }
