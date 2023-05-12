@@ -54,12 +54,12 @@
   cursor: pointer;
 }
 .result_btn {
-  padding: 4px;
+  padding: 7px 4px;
   margin: 4px;
   cursor: pointer;
   width: 100%;
 }
 .space_for_results {
-  max-height: calc(100%-85px);
+  max-height: calc(100%-88px);
   overflow-y: auto;
 }

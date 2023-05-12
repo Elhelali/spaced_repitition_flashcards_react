@@ -115,3 +115,12 @@ h3 {
   right: 10px;
   cursor: pointer;
 }
+#add_word_btn{
+  padding:5px;
+  background-color: #3a5b86;
+  color:white;
+  cursor: pointer;
+  margin:10px;
+  border: 1px;
+  border-radius: 2px;
+}

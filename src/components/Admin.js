@@ -21,7 +21,7 @@ const Admin = (props) => {
       </button>
 
       {words && <div> Word Count: {words.length}</div>}
-      <button onClick={() => setIsModalOpen(true)}>Add Word</button>
+      <button id="add_word_btn" onClick={() => setIsModalOpen(true)}>Add Word</button>
       <AddWordModal
         isOpen={isModalOpen}
         closeModal={() => setIsModalOpen(false)}
