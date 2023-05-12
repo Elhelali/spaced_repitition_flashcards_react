@@ -8,7 +8,7 @@ import * as requests from './requests'
 function App() {
   const [viewAdmin, setViewAdmin] = useState(false);
   const [_id, set_id] = useState("");
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const toggleMode = () =>{
     setViewAdmin(!viewAdmin)
   }
@@ -17,7 +17,8 @@ function App() {
     if (_id){
       requests.get_user().then(res=>{
         if (res.success)
-        { setUser(res.user)
+        { 
+          setUser(res.user)
         }
         else{
           alert("User Not Found")
@@ -33,7 +34,7 @@ function App() {
   return (
     <div className="App">
       {viewAdmin? <Admin toggleMode={toggleMode} /> : 
-      <UserPage user={user} setUser={setUser} toggleMode={toggleMode} />}
+      user && <UserPage user={user} setUser={setUser} toggleMode={toggleMode} />}
     </div>
   );
 }

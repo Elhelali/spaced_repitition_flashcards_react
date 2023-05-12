@@ -34,3 +34,7 @@ export async function submit_result(data) { //adds word to db
     const response = await axios.post(`submit_result`,data)
     return response.data
 }
+export async function update_user_words() { //adds word to db
+    const response = await axios.post(`update_user_words`)
+    return response.data
+}

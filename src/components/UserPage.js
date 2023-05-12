@@ -1,13 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { NIL } from 'uuid';
 import '../App.css';
 import Flashcard from './Flashcard/Flashcard';
+import * as requests from '../requests'
+const _ = require('lodash');
+
 const UserPage = (props) => {
 
   const words = props?.user?.words || []
   const [showWords, setShowWords] = useState([]);
   const [done,setDone]=useState(false);
   const [currentWord,setCurrentWord]= useState(null)
+
+//update user words to mirror admin words
+useEffect(()=>{
+    requests.get_words().then( (words)=>
+        {
+            const adminWords = words.map(obj => obj._id);
+            const adminWordsSet = new Set(adminWords);
+            const userWords = props.user.words.map(obj => obj.word);
+            const userWordsSet = new Set(userWords);
+            if (!_.isEqual(adminWordsSet, userWordsSet)){
+                requests.update_user_words().then(
+                    response=> props.setUser(response.user)
+                )
+            }
+        }
+    )
+},[])
 
 useEffect(() => {
 //   const bins = [0,5,25,160,600,3600,18000,86400,432000,2160000,10368000];

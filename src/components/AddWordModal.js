@@ -19,10 +19,7 @@ const style = {
 };
 
 export default function AddWordModal(props) {
-  const [open, setOpen] = React.useState(false);
   const[errorMessage,setErrorMessage] = React.useState("")
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const handleSubmit = (e) =>{
     e.preventDefault()
     const word = e.target.word.value
@@ -46,7 +43,7 @@ export default function AddWordModal(props) {
               let newWords = [...props.words]
               newWords.unshift({_id:word,definition:definition})
               props.setWords(newWords)
-              setOpen(false)
+              props.closeModal()
             }
             else{
               setErrorMessage("Definition not found for word")
@@ -63,8 +60,8 @@ export default function AddWordModal(props) {
   return (
     <div>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={props.isOpen} 
+        onClose={props.closeModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
