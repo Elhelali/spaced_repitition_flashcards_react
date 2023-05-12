@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Flashcard.css"; // import CSS for styling
 import trashIcon from "../../images/trash.png";
 import * as requests from "../../requests";
@@ -50,7 +50,7 @@ const Flashcard = (props) => {
         <div className="Front">
           {props.admin && (
             <button className="delete_flashcard" onClick={handleDeleteCard}>
-              <img style={{ height: 20 }} src={trashIcon} />
+              <img alt={"delete"} style={{ height: 20 }} src={trashIcon} />
             </button>
           )}
           <span>{props._id.toUpperCase()}</span>
