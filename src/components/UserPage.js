@@ -25,7 +25,7 @@ const UserPage = (props) => {
           .then((response) => props.setUser(response.user));
       }
     });
-  }, []);
+  }, [props.user?._id]);
 
   useEffect(() => {
     const bins = [0,5,25,160,600,3600,18000,86400,432000,2160000,10368000];
