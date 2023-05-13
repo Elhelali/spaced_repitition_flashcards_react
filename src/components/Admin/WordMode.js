@@ -7,7 +7,6 @@ import * as requests from "../../requests";
 const WordMode =()=>{
     const [words, setWords] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
     useEffect(() => {
         requests.get_words().then((words) => {
           setWords(words);

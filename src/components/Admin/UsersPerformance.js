@@ -5,6 +5,7 @@ import Dashes from "./Dashes";
 
 const UsersPerformance = () => {
   const [users, setUsers] = useState([]);
+  const bins = [0,5,25,160,600,3600,18000,86400,432000,2160000,10368000];
 
   useEffect(() => {
     requests.get_all_users().then((data) => {
@@ -21,6 +22,27 @@ const UsersPerformance = () => {
         setUsers(updatedUsers);
     })
   }
+  const getNextShow = (word) => {
+    if (word.wrong_count ===10 || word.bin ===11) {
+        return "None";
+    } else {
+        const differenceInSeconds = Math.floor(word.last_answer + bins[word.bin] - Date.now() / 1000);
+        if (differenceInSeconds < 60) {
+            return differenceInSeconds > 0 ? `${differenceInSeconds} seconds` : "Now";
+        } else if (differenceInSeconds < 3600) {
+            const minutes = Math.floor(differenceInSeconds / 60);
+            return `${minutes} minute${minutes > 1 ? 's' : ''}`;
+        } else if (differenceInSeconds < 86400) {
+            const hours = Math.floor(differenceInSeconds / 3600);
+            return `${hours} hour${hours > 1 ? 's' : ''}`;
+        } else {
+            const days = Math.floor(differenceInSeconds / 86400);
+            return `${days} day${days > 1 ? 's' : ''}`;
+        }
+    }
+}
+
+
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       {Array.isArray(users) &&
@@ -47,8 +69,16 @@ const UsersPerformance = () => {
                           component="p"
                           variant="body1"
                           color="textSecondary"
+                          style={{borderBottom:"1px solid grey"}}
                         >
-                          {word.word} <Dashes filledCount={word.bin} />
+                          <p style={{color:"black",fontWeight:600,padding:"5"}}>{word.word}</p>
+                          Bin
+                          <Dashes color={"#3a5b86"} count={11} filledCount={word.bin} />
+                          Wrong
+                          <Dashes color={"red"} count={10} filledCount={word.wrong_count} />
+                          Next Show: {
+                            getNextShow(word)
+                          }
                         </Typography>
                       ))}
                     </React.Fragment>
