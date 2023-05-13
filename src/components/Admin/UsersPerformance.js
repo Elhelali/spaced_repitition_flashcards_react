@@ -12,7 +12,7 @@ import Dashes from "./Dashes";
 const UsersPerformance = () => {
   const [users, setUsers] = useState([]);
   const bins = [
-    0, 5, 25, 160, 600, 3600, 18000, 86400, 432000, 2160000, 10368000,
+    0, 5, 25, 120, 600, 3600, 18000, 86400, 432000, 2160000, 10368000,
   ];
 
   useEffect(() => {
