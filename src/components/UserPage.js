@@ -79,9 +79,7 @@ const UserPage = (props) => {
         }
       })
       .catch((e) => {
-        {
           console.log(e);
-        }
       });
   };
   return (
@@ -116,7 +114,7 @@ const UserPage = (props) => {
           Admin Mode
         </button>
       )}
-      {currentWord !== null && (
+      {currentWord !== null && !done && (
         <Flashcard
           user={props.user}
           setUser={props.setUser}
