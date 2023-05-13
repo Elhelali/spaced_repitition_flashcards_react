@@ -28,9 +28,7 @@ const UserPage = (props) => {
   }, []);
 
   useEffect(() => {
-    //   const bins = [0,5,25,160,600,3600,18000,86400,432000,2160000,10368000];
-    const bins = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
-
+    const bins = [0,5,25,160,600,3600,18000,86400,432000,2160000,10368000];
     const calculateShowWords = () => {
       const possibleWords = words.filter(
         (word) => word.bin < 11 && word.wrong_count < 10
