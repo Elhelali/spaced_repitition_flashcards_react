@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../App.css";
+import UsersPerformance from "./UsersPerformance";
 import WordMode from "./WordMode";
 
 const Admin = (props) => {
@@ -17,7 +18,7 @@ const Admin = (props) => {
       <button onClick={props.toggleMode} className="change_mode" id="user_btn">
         User Mode
       </button>
-      { (wordsPerformanceToggle && <WordMode /> ) || "" }
+      { wordsPerformanceToggle?  <WordMode /> : <UsersPerformance /> }
     </div>
   );
 };

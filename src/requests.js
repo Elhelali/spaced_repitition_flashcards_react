@@ -40,6 +40,11 @@ export async function get_user() {
   return response.data;
 }
 
+export async function get_all_users() {
+  //adds word to db
+  const response = await axios.get(`get_all_users`);
+  return response.data;
+}
 export async function submit_result(data) {
   //adds word to db
   const response = await axios.post(`submit_result`, data);
@@ -48,5 +53,10 @@ export async function submit_result(data) {
 export async function update_user_words() {
   //adds word to db
   const response = await axios.post(`update_user_words`);
+  return response.data;
+}
+
+export async function admin_update_user_words(user_id){
+  const response = await axios.post(`update_user_words`,{user_id:user_id});
   return response.data;
 }
