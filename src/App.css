@@ -89,11 +89,14 @@ h3 {
   margin: auto;
   cursor: pointer;
 }
-#add_word_button {
+.admin_btn {
   margin: 10px auto;
+  padding: 8px;
+  border:1px;
   position: relative;
   background-color: #3a5b86;
   color: white;
+  cursor: pointer;
 }
 .error_message {
   color: red;

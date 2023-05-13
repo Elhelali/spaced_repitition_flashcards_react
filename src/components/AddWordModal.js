@@ -1,6 +1,5 @@
 import React, { useState,useEffect }from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 import * as requests from "../requests";
@@ -106,11 +105,6 @@ export default function AddWordModal(props) {
       >
         <Box sx={style}>
           <form onSubmit={handleSubmit}>
-            {props.deletable && (
-              <button>
-                <Typography>Filled</Typography>
-              </button>
-            )}
             <input className="add_word_input" name="word" placeholder="Word" />
             <input className="add_word_input" 
             name="definition" 

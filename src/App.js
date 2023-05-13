@@ -1,5 +1,5 @@
 import "./App.css";
-import Admin from "./components/Admin";
+import Admin from "./components/Admin/Admin";
 import UserPage from "./components/UserPage";
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
