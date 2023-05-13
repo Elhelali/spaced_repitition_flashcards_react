@@ -56,12 +56,12 @@ export async function update_user_words() {
   return response.data;
 }
 
-export async function admin_update_user_words(user_id){
-  const response = await axios.post(`update_user_words`,{user_id:user_id});
+export async function admin_update_user_words(user_id) {
+  const response = await axios.post(`update_user_words`, { user_id: user_id });
   return response.data;
 }
 
-export async function update_name(name){
-  const response = await axios.post(`update_name`,{name:name});
+export async function update_name(name) {
+  const response = await axios.post(`update_name`, { name: name });
   return response.data;
 }

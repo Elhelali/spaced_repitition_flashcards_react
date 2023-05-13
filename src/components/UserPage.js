@@ -13,7 +13,7 @@ const UserPage = (props) => {
 
   //update user words to mirror admin words
   useEffect(() => {
-    setUsername(props.user.name)
+    setUsername(props.user.name);
     requests.get_words().then((words) => {
       const adminWords = words.map((obj) => obj._id);
       const adminWordsSet = new Set(adminWords);
@@ -67,23 +67,32 @@ const UserPage = (props) => {
     return () => clearInterval(intervalId);
   }, [words, currentWord, done]);
 
-  const handleNameChange = (e) =>{
-    setUsername(e.target.value)
-    requests.update_name(e.target.value).then((response)=>{
-      if (response.success){
-        let updated_user = {...props.user}
-        updated_user.name = e.target.value
-        props.setUser(updated_user)
-      }
-    }).catch(e=>{
-      {
-        console.log(e)
-      }
-    })
-  }
+  const handleNameChange = (e) => {
+    setUsername(e.target.value);
+    requests
+      .update_name(e.target.value)
+      .then((response) => {
+        if (response.success) {
+          let updated_user = { ...props.user };
+          updated_user.name = e.target.value;
+          props.setUser(updated_user);
+        }
+      })
+      .catch((e) => {
+        {
+          console.log(e);
+        }
+      });
+  };
   return (
     <div>
-      <input className="add_word_input" value={username} onChange={handleNameChange} name="name" placeholder="Your Name" />
+      <input
+        className="add_word_input"
+        value={username}
+        onChange={handleNameChange}
+        name="name"
+        placeholder="Your Name"
+      />
       {(!props.user.words && <div className="header">Loading</div>) ||
         (done && (
           <div className="header">
