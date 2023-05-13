@@ -11,9 +11,11 @@ const UserPage = (props) => {
   const [currentWord, setCurrentWord] = useState(null);
   const [username, setUsername] = useState("");
 
+  useEffect(()=>{
+    setUsername(props.user.name);
+  },[props.user.name])
   //update user words to mirror admin words
   useEffect(() => {
-    setUsername(props.user.name);
     requests.get_words().then((words) => {
       const adminWords = words.map((obj) => obj._id);
       const adminWordsSet = new Set(adminWords);
